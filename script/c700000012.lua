@@ -3,6 +3,11 @@
 function c700000012.initial_effect(c)
 	--pendulum summon
 	aux.EnablePendulumAttribute(c)
+	--Activate
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_ACTIVATE)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	c:RegisterEffect(e1)
 	--Reduce ATK (P)
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_ATKCHANGE)
@@ -28,7 +33,7 @@ function c700000012.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function c700000012.cfilter(c)
-	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0x120e) and c:IsAbleToDeckOrExtraAsCost()
+	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0x10ec) and c:IsAbleToDeckOrExtraAsCost()
 end
 function c700000012.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c700000012.cfilter,tp,LOCATION_MZONE,0,1,nil) end
@@ -36,7 +41,7 @@ function c700000012.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local atk=g:GetFirst():GetAttack()
 	if atk<0 then atk=0 end
 	e:SetLabel(atk)
-	Duel.SendToExtra(g,POS_FACEUP,REASON_COST)
+	Duel.PSendtoExtra(g,nil,REASON_COST)
 end
 function c700000012.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
@@ -56,7 +61,7 @@ function c700000012.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c700000012.atkfil(c)
-	return c:IsFaceup() and c:IsSetCard(0x120e)
+	return c:IsFaceup() and c:IsSetCard(0x10ec)
 end
 function c700000012.atkop2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

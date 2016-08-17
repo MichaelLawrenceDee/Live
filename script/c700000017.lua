@@ -3,6 +3,11 @@
 function c700000017.initial_effect(c)
 	--pendulum summon
 	aux.EnablePendulumAttribute(c)
+	--Activate
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_ACTIVATE)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	c:RegisterEffect(e1)
 	--Reduce ATK (P)
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_ATKCHANGE)
@@ -54,21 +59,21 @@ function c700000017.desop(e,tp,eg,ep,ev,re,r,rp)
 	if not dc then return end
 	local bc=dc:GetBattleTarget()
 	if ep==tp then
-		if bc:IsControler(tp) and bc:IsSetCard(0x120e) and bc:IsStatus(STATUS_BATTLE_DESTROYED) 
+		if bc:IsControler(tp) and bc:IsSetCard(0x10ec) and bc:IsStatus(STATUS_BATTLE_DESTROYED) 
 			and not dc:IsStatus(STATUS_BATTLE_DESTROYED) then
 			dc:RegisterFlagEffect(700000017+tp,RESET_EVENT+0x1fe0000,0,1,ev)
 		end
-		if dc:IsControler(tp) and dc:IsSetCard(0x120e) and dc:IsStatus(STATUS_BATTLE_DESTROYED) 
+		if dc:IsControler(tp) and dc:IsSetCard(0x10ec) and dc:IsStatus(STATUS_BATTLE_DESTROYED) 
 			and not bc:IsStatus(STATUS_BATTLE_DESTROYED) then
 			bc:RegisterFlagEffect(700000017+tp,RESET_EVENT+0x1fe0000,0,1,ev)
 		end
 	end
 	if ep==1-tp then
-		if bc:IsControler(1-tp) and bc:IsSetCard(0x120e) and bc:IsStatus(STATUS_BATTLE_DESTROYED) 
+		if bc:IsControler(1-tp) and bc:IsSetCard(0x10ec) and bc:IsStatus(STATUS_BATTLE_DESTROYED) 
 			and not dc:IsStatus(STATUS_BATTLE_DESTROYED) then
 			dc:RegisterFlagEffect(700000017+1-tp,RESET_EVENT+0x1fe0000,0,1,ev)
 		end
-		if dc:IsControler(1-tp) and dc:IsSetCard(0x120e) and dc:IsStatus(STATUS_BATTLE_DESTROYED) 
+		if dc:IsControler(1-tp) and dc:IsSetCard(0x10ec) and dc:IsStatus(STATUS_BATTLE_DESTROYED) 
 			and not bc:IsStatus(STATUS_BATTLE_DESTROYED) then
 			bc:RegisterFlagEffect(700000017+1-tp,RESET_EVENT+0x1fe0000,0,1,ev)
 		end
